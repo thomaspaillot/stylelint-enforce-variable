@@ -1,0 +1,12 @@
+node_modules
+
+target
+coverage
+
+/fixtures
+
+.DS_STORE
+*.log
+
+.idea/
+.out
