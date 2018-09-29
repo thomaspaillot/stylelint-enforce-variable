@@ -11,7 +11,9 @@
   "private": false,
   "preferGlobal": true,
   "scripts": {
-    "test": "export TAP_DIAG=1; tape-watch test/*.js | tap-spec"
+    "test": "tape test/*.test.js",
+    "test:coverage": "istanbul cover tape test/*.test.js",
+    "test:watch": "export TAP_DIAG=1; tape-watch test/*.test.js | tap-spec"
   },
   "devDependencies": {
     "eslint": "^5.3.0",
@@ -19,6 +21,7 @@
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^2.6.2",
+    "istanbul": "^0.4.5",
     "prettier": "^1.14.2",
     "stylelint-test-rule-tape": "^0.2.0",
     "tap-spec": "^5.0.0",
