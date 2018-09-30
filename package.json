@@ -1,5 +1,5 @@
 {
-  "name": "stylelint-enfore-variable",
+  "name": "stylelint-enforce-variable",
   "version": "0.0.0",
   "description": "Stylelint plugin to enforce variable use for certain properties",
   "keywords": [
@@ -8,8 +8,14 @@
   "main": "./src/index.js",
   "author": "Thomas Paillot <paillot.thomas@gmail.com>",
   "license": "MIT",
-  "private": false,
-  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomaspaillot/stylelint-enforce-variable.git"
+  },
+  "homepage": "https://github.com/thomaspaillot/stylelint-enforce-variable#readme",
+  "bugs": {
+    "url": "https://github.com/thomaspaillot/stylelint-enforce-variable/issues"
+  },
   "scripts": {
     "test": "tape test/*.test.js",
     "test:coverage": "istanbul cover tape test/*.test.js",
