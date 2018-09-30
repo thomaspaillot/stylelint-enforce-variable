@@ -1,5 +1,4 @@
 const stylelint = require('stylelint');
-// const test = require('tape')();
 
 const ruleName = 'thomaspaillot/enforce-variable';
 const messages = stylelint.utils.ruleMessages(ruleName, {
