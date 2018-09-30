@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/thomaspaillot/stylelint-enforce-variable.svg?branch=master)](https://travis-ci.org/thomaspaillot/stylelint-enforce-variable)
 
+[![codecov](https://codecov.io/gh/thomaspaillot/stylelint-enforce-variable/branch/master/graph/badge.svg)](https://codecov.io/gh/thomaspaillot/stylelint-enforce-variable)
+
 A [stylelint](https://github.com/stylelint/stylelint) plugin that enforces variables use for specified properties. Variables could be scss, less or custom css variable ($, map-get(), @ or var(--name) is supported). Shorthand declaration is also supported, declaration like "border: 1px solid var(--blue);" or "margin: $ws-s $ws-l;" will be checked.
 
 ## Installation
