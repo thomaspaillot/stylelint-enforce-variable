@@ -6,4 +6,8 @@ cache:
   yarn: true
   directories:
     - node_modules
-script: yarn run test:coverage
+install:
+  - npm install -g codecov
+script:
+  - yarn run test:coverage
+  - codecov
