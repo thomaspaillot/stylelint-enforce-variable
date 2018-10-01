@@ -1,6 +1,6 @@
 {
   "name": "stylelint-enforce-variable",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Stylelint plugin to enforce variables use for specifics properties",
   "keywords": [
     "stylelint-plugin"
