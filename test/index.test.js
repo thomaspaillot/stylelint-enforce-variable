@@ -1,4 +1,5 @@
 const test = require('tape');
+const stylelint = require('stylelint');
 const testRule = require('stylelint-test-rule-tape');
 const { isPropertyChecked, isValueAcceptedForProperty, ruleName, rule } = require('../src');
 
@@ -150,4 +151,44 @@ testRule(rule, {
       message: `Expected variable for border-color. (${ruleName})`
     }
   ]
+});
+
+test('incorrect parameters', t => {
+  t.test('should display error on incorrect properties argument', tt => {
+    const rules = {
+      [ruleName]: { properties: 'color' }
+    };
+    const code = `div {}`;
+    const options = {
+      code,
+      configBasedir: __dirname,
+      config: {
+        plugins: ['../src'],
+        rules
+      }
+    };
+    return stylelint.lint(options).then(result => {
+      tt.ok(result.results[0].invalidOptionWarnings);
+      tt.end();
+    });
+  });
+
+  t.test('should display error on incorrect exception values argument', tt => {
+    const rules = {
+      [ruleName]: { properties: '/color/', exceptionValues: 'none' }
+    };
+    const code = `div {}`;
+    const options = {
+      code,
+      configBasedir: __dirname,
+      config: {
+        plugins: ['../src'],
+        rules
+      }
+    };
+    return stylelint.lint(options).then(result => {
+      tt.ok(result.results[0].invalidOptionWarnings);
+      tt.end();
+    });
+  });
 });

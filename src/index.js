@@ -47,11 +47,20 @@ const isPropertyChecked = (prop, targetProperties) => {
 };
 
 module.exports = stylelint.createPlugin(ruleName, options => (root, result) => {
-  const validOptions = stylelint.utils.validateOptions({
-    ruleName,
+  const isRegex = v => v.startsWith('/') && v.endsWith('/');
+  const validOptions = stylelint.utils.validateOptions(
     result,
-    actual: options
-  });
+    ruleName,
+    {
+      actual: options.properties,
+      possible: isRegex
+    },
+    {
+      actual: options.exceptionValues,
+      possible: isRegex,
+      optional: true
+    }
+  );
 
   if (!validOptions) {
     return;
