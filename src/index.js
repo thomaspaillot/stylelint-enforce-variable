@@ -46,40 +46,45 @@ const isPropertyChecked = (prop, targetProperties) => {
   return false;
 };
 
-module.exports = stylelint.createPlugin(ruleName, options => (root, result) => {
-  const isRegex = v => v.startsWith('/') && v.endsWith('/');
-  const validOptions = stylelint.utils.validateOptions(
-    result,
-    ruleName,
-    {
-      actual: options.properties,
-      possible: isRegex
-    },
-    {
-      actual: options.exceptionValues,
-      possible: isRegex,
-      optional: true
-    }
-  );
+module.exports = stylelint.createPlugin(
+  ruleName,
+  (primaryOption, secondaryOptions) => (root, result) => {
+    const isRegex = v => v.startsWith('/') && v.endsWith('/');
+    const validOptions = stylelint.utils.validateOptions(
+      result,
+      ruleName,
+      {
+        actual: primaryOption,
+        possible: isRegex
+      },
+      {
+        actual: secondaryOptions,
+        possible: {
+          exceptionValues: isRegex
+        },
+        optional: true
+      }
+    );
 
-  if (!validOptions) {
-    return;
+    if (!validOptions) {
+      return;
+    }
+
+    root.walkDecls(node => {
+      if (
+        isPropertyChecked(node.prop, primaryOption) &&
+        !isValueAcceptedForProperty(node.value, node.prop, secondaryOptions.exceptionValues)
+      ) {
+        stylelint.utils.report({
+          ruleName,
+          result,
+          node,
+          message: messages.expected(node.prop)
+        });
+      }
+    });
   }
-
-  root.walkDecls(node => {
-    if (
-      isPropertyChecked(node.prop, options.properties) &&
-      !isValueAcceptedForProperty(node.value, node.prop, options.exceptionValues)
-    ) {
-      stylelint.utils.report({
-        ruleName,
-        result,
-        node,
-        message: messages.expected(node.prop)
-      });
-    }
-  });
-});
+);
 
 module.exports.ruleName = ruleName;
 module.exports.messages = messages;

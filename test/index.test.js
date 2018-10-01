@@ -127,10 +127,12 @@ test('isValueAcceptedForProperty', t => {
 
 testRule(rule, {
   ruleName,
-  config: {
-    properties: '/^color|border/',
-    exceptionValues: '/^(transparent)|(none)/'
-  },
+  config: [
+    '/^color|border/',
+    {
+      exceptionValues: '/^(transparent)|(none)/'
+    }
+  ],
   skipBasicChecks: true,
 
   accept: [
@@ -156,7 +158,7 @@ testRule(rule, {
 test('incorrect parameters', t => {
   t.test('should display error on incorrect properties argument', tt => {
     const rules = {
-      [ruleName]: { properties: 'color' }
+      [ruleName]: ['color']
     };
     const code = `div {}`;
     const options = {
@@ -168,14 +170,14 @@ test('incorrect parameters', t => {
       }
     };
     return stylelint.lint(options).then(result => {
-      tt.ok(result.results[0].invalidOptionWarnings);
+      tt.equal(result.errored, true);
       tt.end();
     });
   });
 
   t.test('should display error on incorrect exception values argument', tt => {
     const rules = {
-      [ruleName]: { properties: '/color/', exceptionValues: 'none' }
+      [ruleName]: ['/color/', { exceptionValues: 'none' }]
     };
     const code = `div {}`;
     const options = {
@@ -187,7 +189,7 @@ test('incorrect parameters', t => {
       }
     };
     return stylelint.lint(options).then(result => {
-      tt.ok(result.results[0].invalidOptionWarnings);
+      tt.equal(result.errored, true);
       tt.end();
     });
   });
