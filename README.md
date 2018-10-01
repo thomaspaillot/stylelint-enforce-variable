@@ -51,7 +51,7 @@ This will match background and background-color properties but not background-si
 
 ```js
 }
-  "properties": "/^(background(-color)?|color|fill|stroke|border((-top|-left|-right|-bottom)?-color)?)$/"
+  "properties": "/^(background(-color)?|color|fill|stroke|border((-top|-left|-right|-bottom)?(-color)?)?)$/"
 }
 ```
 
